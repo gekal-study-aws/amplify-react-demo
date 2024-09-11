@@ -17,9 +17,28 @@
     "3000:3000"
   ],
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "npm install &&  npm start",
+  "postCreateCommand": "npm install",
   // Configure tool-specific properties.
-  "customizations": {},
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        "humao.rest-client",
+        "dsznajder.es7-react-js-snippets",
+        "leizongmin.node-module-intellisense",
+        "eamodio.gitlens",
+        "yzhang.markdown-all-in-one"
+      ]
+    },
+    "codespaces": {},
+    "jetbrains": {
+      "settings": {
+        "Docker:app:DockerSettings.dockerPath": "/usr/local/bin/docker",
+        "Git4Idea:app:Git-Application-Settings.use_credential_helper": true,
+        "com.intellij:app:HttpConfigurable.use_proxy_pac": true
+      }
+    }
+  },
   // https://containers.dev/implementors/json_reference/#variables-in-devcontainerjson
   "containerEnv": {
     "LOCAL_USERNAME": "${localEnv:USERNAME}"
@@ -31,5 +50,8 @@
   "remoteUser": "gekal",
   "remoteEnv": {
     "PATH": "${containerEnv:PATH}"
-  }
+  },
+  // https://code.visualstudio.com/remote/advancedcontainers/change-default-source-mount
+  "workspaceMount": "source=${localWorkspaceFolder},target=/usr/src/app,type=bind",
+  "workspaceFolder": "/usr/src/app"
 }
