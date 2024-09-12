@@ -1,7 +1,7 @@
 import React from 'react';
 import {render, screen, fireEvent, act} from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import Button from './Button'; // adjust the import path according to your project structure
+import Button from './Button';
 
 test('renders Button component', () => {
     act(() => {

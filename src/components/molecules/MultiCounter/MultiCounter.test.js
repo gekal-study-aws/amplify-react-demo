@@ -1,24 +1,28 @@
 import React from 'react';
 import {render, screen, fireEvent, act} from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import Counter from './MultiCounter'; // adjust the import path according to your project structure
+import MultiCounter from "./MultiCounter";
 
-test('renders Counter component', () => {
+test('renders MultiCounter component', () => {
     act(() => {
-        render(<Counter label="Click Me"/>);
+        render(<MultiCounter/>);
     });
-    const buttonElement = screen.getByText(/Click Me/i);
-    expect(buttonElement).toBeInTheDocument();
+
+    const buttonElements = screen.getAllByText(/Clicked 0 times/i);
+    expect(buttonElements).toHaveLength(2);
 });
 
 test('calls onClick callback when clicked', () => {
-    const handleClick = jest.fn();
     act(() => {
-        render(<Counter onClick={handleClick} label="Click Me"/>);
+        render(<MultiCounter/>);
     });
 
-    const buttonElement = screen.getByText(/Click Me/i);
-    fireEvent.click(buttonElement);
+    const buttonElements = screen.getAllByText(/Clicked 0 times/i);
 
-    expect(handleClick).toHaveBeenCalledTimes(1);
+    let count = 0;
+    buttonElements.forEach((buttonElement) => {
+        fireEvent.click(buttonElement);
+        count++; // count up
+        buttonElements.forEach((it) => expect(it).toHaveTextContent(`Clicked ${count} times`));
+    });
 });
