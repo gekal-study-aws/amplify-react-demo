@@ -1,0 +1,11 @@
+.counter {
+    padding: 10px 20px;
+    background-color: #f4e863;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.counter:hover {
+    background-color: #b14dd8;
+}
